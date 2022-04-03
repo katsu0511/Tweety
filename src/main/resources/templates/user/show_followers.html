@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="common/common :: head"></head>
+<body><div class="wrap">
+<header th:include="common/common :: header"></header>
+
+<main>
+	<div class="inner">
+		<section class="box">
+		
+			<button type="button" class="back_btn back_follow" th:text="#{back_btn}" onclick="history.back()"></button>
+			<h2 th:text="#{follower_number}">Follower</h2>
+			<input type="text" id="search_input" th:placeholder="#{search_input}">
+			
+			<div class="search_results">
+				<th:block th:if="${followers.isEmpty}">
+					<p class="no_shows" th:text="#{no_user}">There's no one to show.</p>
+				</th:block>
+				<th:block th:unless="${followers.isEmpty}">
+					<div class="search_result" th:each="follower:${followers}">
+						<a th:href="@{'/user/' + ${follower.userName}}" class="search_user_link">
+							<th:block th:if="${follower.profile == null || follower.profile.icon == null}">
+								<div class="tweet_icon" th:style="'background: url(' + @{/img/user.png} + ') no-repeat center/cover;'"></div>
+							</th:block>
+							<th:block th:unless="${follower.profile == null || follower.profile.icon == null}">
+								<div class="tweet_icon" th:style="'background: url(' + @{'/icon/' + ${follower.profile.icon}} + ') no-repeat center/cover;'"></div>
+							</th:block>
+							
+							<div class="search_usernms">
+								<th:block th:if="${follower.profile == null || follower.profile.name == null}">
+									<span class="prof_name" th:text="${follower.userName}"></span>
+								</th:block>
+								<th:block th:unless="${follower.profile == null || follower.profile.name == null}">
+									<span class="prof_name" th:text="${follower.profile.name}"></span>
+									<span class="user_name" th:text="${follower.userName}"></span>
+								</th:block>
+							</div>
+						</a>
+					</div>
+				</th:block>
+			</div>
+			
+		</section>
+	</div>
+</main>
+
+<footer th:include="common/common :: footer"></footer>
+</div>
+<script type="text/javascript" th:src="@{/js/search_follow.js}"></script>
+</body>
+</html>

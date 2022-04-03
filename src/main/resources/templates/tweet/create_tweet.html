@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="common/common :: head"></head>
+<body><div class="wrap">
+<header th:include="common/common :: header"></header>
+
+<main class="sp_main">
+	<div class="inner">
+		<section class="box">
+		
+			<h2 th:text="#{tweet}">Tweet</h2>
+			<form class="form tweet_form" th:action="@{/create_tweet}" method="POST">
+			
+				<div class="item">
+					<div class="input">
+						<textarea id="tweet" class="data_input" name="tweet" required></textarea>
+						<p th:text="#{tweet_error}" id="tweet_error" class="error">Please input Tweet Content</p>
+					</div>
+				</div>
+				
+				<div class="buttons">
+					<input type="hidden" name="user_id" th:value="${user.id}">
+					<input type="submit" id="create" class="button" th:value="#{save}">
+					<a th:href="@{/profile}" th:text="#{back}" class="button">Back</a>
+				</div>
+			</form>
+			
+		</section>
+	</div>
+</main>
+
+<footer th:include="common/common :: footer"></footer>
+</div>
+<script type="text/javascript">
+$('#create').click(function() {
+	const tweet = $('#tweet');
+	const tweetError = $('#tweet_error');
+	if (tweet.val() == '' || $.trim(tweet.val()) == '') {
+		tweetError.css('display', 'block');
+		tweet.focus();
+		return false;
+	}
+});
+</script>
+</body>
+</html>

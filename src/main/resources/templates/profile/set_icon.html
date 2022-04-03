@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="common/common :: head"></head>
+<body><div class="wrap">
+<header th:include="common/common :: header"></header>
+
+<main class="sp_main">
+	<div class="inner">
+		<section class="box">
+		
+			<h2 th:text="#{icon}">Icon</h2>
+			<form class="form" th:action="@{/profile/icon_set}" method="POST" enctype="multipart/form-data">
+			
+				<div class="item icon_item">
+					<div class="input">
+						<input type="file" id="icon" class="icon_input" name="icon" accept="image/*">
+					</div>
+				</div>
+				
+				<div class="buttons">
+				<input type="hidden" id="icon_set" th:value="${icon}">
+					<input type="submit" id="create" class="button" th:value="#{save}">
+					<a th:href="@{/profile}" th:text="#{back}" class="button">Back</a>
+				</div>
+			</form>
+			
+		</section>
+	</div>
+</main>
+
+<footer th:include="common/common :: footer"></footer>
+</div>
+<script type="text/javascript" th:inline="javascript">
+	$('#create').click(function() {
+		if ($('#icon_set').val() == "set") {
+			var message = /*[[#{icon_set}]]*/ 'Are you ok for the current icon to be deleted?';
+			if (!confirm(message)) {
+				return false;
+			}
+		}
+	});
+</script>
+</body>
+</html>

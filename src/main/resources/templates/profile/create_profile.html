@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="common/common :: head"></head>
+<body><div class="wrap">
+<header th:include="common/common :: header"></header>
+
+<main>
+	<div class="inner">
+		<section class="box">
+		
+			<h2 th:text="#{create_profile}">Create Profile</h2>
+			<form class="form" th:action="@{/create_profile}" method="POST">
+			
+				<div class="item">
+					<label for="name" th:text="#{name}">Name : </label>
+					<div class="input">
+						<input type="text" id="name" class="data_input" name="name">
+					</div>
+				</div>
+				
+				<div class="item">
+					<label for="profile" th:text="#{profile_input}">Profile : </label>
+					<div class="input">
+						<textarea id="profile" class="data_input" name="profile"></textarea>
+					</div>
+				</div>
+				
+				<div class="buttons">
+					<input type="submit" id="create" class="button" th:value="#{save}">
+					<a th:href="@{/profile}" th:text="#{back}" class="button">Back</a>
+				</div>
+			</form>
+			
+		</section>
+	</div>
+</main>
+
+<footer th:include="common/common :: footer"></footer>
+</div>
+</body>
+</html>

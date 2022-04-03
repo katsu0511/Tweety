@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="common/common :: head"></head>
+<body><div class="wrap">
+<header th:include="common/common :: header"></header>
+
+<main>
+	<div class="inner">
+		<section class="box profile">
+		
+			<h2 th:text="#{profile}">Profile</h2>
+			<a th:href="@{/profile/icon_set}" class="icon">
+				<th:block th:if="${profile == null || profile.icon == null}">
+					<div class="icon_img" th:style="'background: url(' + @{/img/user.png} + ') no-repeat center/cover;'"></div>
+				</th:block>
+				<th:block th:unless="${profile == null || profile.icon == null}">
+					<div class="icon_img" th:style="'background: url(' + @{'/icon/' + ${profile.icon}} + ') no-repeat center/cover;'"></div>
+				</th:block>
+			</a>
+			
+			<th:block th:if="${profile == null || profile.name == null}">
+				<p class="profile_name" th:text="${user.userName}"></p>
+			</th:block>
+			<th:block th:unless="${profile == null || profile.name == null}">
+				<p class="profile_name" th:text="${profile.name}"></p>
+				<p class="user_name" th:text="${user.userName}"></p>
+			</th:block>
+			
+			<th:block th:if="${profile != null && profile.profile != null}">
+				<p class="profile_content" th:text="${profile.profile}"></p>
+			</th:block>
+			
+			<th:block th:if="${profile == null}">
+				<a th:href="@{/create_profile}" th:text="#{create}" class="button">Create Profile</a>
+			</th:block>
+			<th:block th:unless="${profile == null}">
+				<a th:href="@{/edit_profile}" th:text="#{edit}" class="button">Edit Profile</a>
+			</th:block>
+			
+			<div class="numbers">
+				<div class="following_number">
+					<a th:href="@{/profile/following}">
+						<span th:text="${following}"></span>
+						<th:block th:if="${following == 0 || following == 1}">
+							<span th:text="#{following_number}">Following</span>
+						</th:block>
+						<th:block th:unless="${following == 0 || following == 1}">
+							<span th:text="#{following_numbers}">Followings</span>
+						</th:block>
+					</a>
+				</div>
+				<div class="follower_number">
+					<a th:href="@{/profile/follower}">
+						<span th:text="${follower}"></span>
+						<th:block th:if="${follower == 0 || follower == 1}">
+							<span th:text="#{follower_number}">Follower</span>
+						</th:block>
+						<th:block th:unless="${follower == 0 || follower == 1}">
+							<span th:text="#{follower_numbers}">Followers</span>
+						</th:block>
+					</a>
+				</div>
+			</div>
+			
+			<div class="tabs">
+				<a th:href="@{/profile}" class="tab" th:text="#{tweet}">Tweet</a>
+				<div class="tab active_tab" th:text="#{like}">Like</div>
+			</div>
+			
+			<th:block th:if="${likes.isEmpty}">
+				<p class="no_shows" th:text="#{no_like}">There's no like</p>
+			</th:block>
+			<th:block th:unless="${likes.isEmpty}">
+				<div class="profile_tweets">
+					<div class="profile_tweet" th:each="like:${likes}">
+					
+						<div class="tweet_prof">
+							<th:block th:if="${like.user == user}">
+								<div class="tweet_prof_link">
+									<th:block th:if="${like.user.profile == null || like.user.profile.icon == null}">
+										<div class="tweet_icon" th:style="'background: url(' + @{/img/user.png} + ') no-repeat center/cover;'"></div>
+									</th:block>
+									<th:block th:unless="${like.user.profile == null || like.user.profile.icon == null}">
+										<div class="tweet_icon" th:style="'background: url(' + @{'/icon/' + ${like.user.profile.icon}} + ') no-repeat center/cover;'"></div>
+									</th:block>
+								
+									<th:block th:if="${like.user.profile == null || like.user.profile.name == null}">
+										<span th:text="${like.user.userName}"></span>
+									</th:block>
+									<th:block th:unless="${like.user.profile == null || like.user.profile.name == null}">
+										<span th:text="${like.user.profile.name}"></span>
+									</th:block>
+								</div>
+							</th:block>
+							<th:block th:unless="${like.user == user}">
+								<a th:href="@{'/user/' + ${like.user.userName}}" class="tweet_prof_link">
+									<th:block th:if="${like.user.profile == null || like.user.profile.icon == null}">
+										<div class="tweet_icon" th:style="'background: url(' + @{/img/user.png} + ') no-repeat center/cover;'"></div>
+									</th:block>
+									<th:block th:unless="${like.user.profile == null || like.user.profile.icon == null}">
+										<div class="tweet_icon" th:style="'background: url(' + @{'/icon/' + ${like.user.profile.icon}} + ') no-repeat center/cover;'"></div>
+									</th:block>
+								
+									<th:block th:if="${like.user.profile == null || like.user.profile.name == null}">
+										<span th:text="${like.user.userName}"></span>
+									</th:block>
+									<th:block th:unless="${like.user.profile == null || like.user.profile.name == null}">
+										<span th:text="${like.user.profile.name}"></span>
+									</th:block>
+								</a>
+							</th:block>
+						</div>
+						
+						<div class="tweet_content">
+							<a th:href="${'/tweet/' + like.id}">
+								<p th:text="${like.content}"></p>
+							</a>
+						</div>
+						
+						<div class="tweet_time">
+							<p th:utext="${#strings.substring(like.createdAt,0,19)}"></p>
+						</div>
+						
+						<div class="tweet_like">
+							<div class="tweet_like_left">
+								<th:block th:if="${#lists.isEmpty(like.likerList)}">
+									<th:block th:if="${#lists.contains(like.likerList, user)}">
+										<img th:src="@{/img/unlike.png}" class="unlike_btn" th:tweetId="${like.id}">
+									</th:block>
+									<th:block th:unless="${#lists.contains(like.likerList, user)}">
+										<img th:src="@{/img/like.png}" class="like_btn" th:tweetId="${like.id}">
+									</th:block>
+								</th:block>
+								<th:block th:unless="${#lists.isEmpty(like.likerList)}">
+									<th:block th:if="${#lists.contains(like.likerList, user)}">
+										<img th:src="@{/img/unlike.png}" class="unlike_btn" th:tweetId="${like.id}">
+										<div class="tweet_like_list">
+											<a th:href="@{'/tweet/' + ${like.id} + '/like'}">
+												<span th:text="${#lists.size(like.likerList)}"></span>
+												<span th:text="#{like}"></span>
+											</a>
+										</div>
+									</th:block>
+									<th:block th:unless="${#lists.contains(like.likerList, user)}">
+										<img th:src="@{/img/like.png}" class="like_btn" th:tweetId="${like.id}">
+										<div class="tweet_like_list">
+											<a th:href="@{'/tweet/' + ${like.id} + '/like'}">
+												<span th:text="${#lists.size(like.likerList)}"></span>
+												<span th:text="#{like}"></span>
+											</a>
+										</div>
+									</th:block>
+								</th:block>
+							</div>
+						</div>
+					</div>
+				</div>
+			</th:block>
+			
+		</section>
+	</div>
+</main>
+
+<footer th:include="common/common :: footer"></footer>
+</div>
+<script type="text/javascript" th:src="@{/js/favorite.js}"></script>
+</body>
+</html>

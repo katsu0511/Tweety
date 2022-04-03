@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="common/common :: head"></head>
+<body><div class="wrap">
+<header th:include="common/common :: header"></header>
+
+<main>
+	<div class="inner">
+		<section class="box">
+		
+			<h2 th:text="#{login}">Login</h2>
+			<form class="form" th:action="@{/login}" method="POST">
+			
+				<div class="item">
+					<label for="user_name" th:text="#{user_name}">User Name : </label>
+					<div class="input">
+						<input type="text" id="user_name" class="data_input" name="user_name" th:value="${user_name}">
+					</div>
+				</div>
+				
+				<div class="item">
+					<label for="password" th:text="#{password}">Password : </label>
+					<div class="input">
+						<input type="password" id="password" class="data_input" name="password" th:value="${password}">
+					</div>
+				</div>
+				
+				<p class="error_message" th:text="${msg}"></p>
+				
+				<div class="buttons">
+					<input type="submit" class="button" name="login" th:value="#{login}">
+				</div>
+				
+				<p class="create_account">
+					<span th:text="#{create_account}">if you want to create an account, </span><a th:href="@{/create_user}" th:text="#{click}">click here</a>
+				</p>
+			</form>
+			
+		</section>
+	</div>
+</main>
+
+</div></body>
+</html>

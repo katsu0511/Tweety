@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title th:text="#{title}">Tweety</title>
+	<link type="text/css" rel="stylesheet" th:href="@{/css/style.css}">
+	<link rel="icon" th:href="@{/img/favicon.ico}">
+	<script type="text/javascript" th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js}"></script>
+</head>
+<body><div class="wrap">
+
+	<header th:fragment="header">
+		<div class="inner">
+			<div class="header-left">
+				<h1>
+					<a th:href="@{/timeline}" th:text="#{title}">Tweety</a>
+				</h1>
+			</div>
+			<th:block th:if="${session.user_name != null && session.password != null}">
+				<div class="header-right">
+					<form th:action="@{/logout}" method="POST">
+						<input type="submit" class="button" name="logout" th:value="#{logout}">
+					</form>
+				</div>
+			</th:block>
+		</div>
+	</header>
+	
+	<footer th:fragment="footer">
+		<div class="inner">
+			<ul class="footer_menus">
+				<li class="footer_menu">
+					<a th:href="@{/timeline}" th:text="#{timeline}">Timeline</a>
+				</li>
+				<li class="footer_menu">
+					<a th:href="@{/search}" th:text="#{search}">Search</a>
+				</li>
+				<li class="footer_menu">
+					<a th:href="@{/profile}" th:text="#{profile}">Profile</a>
+				</li>
+			</ul>
+			<div class="tweet">
+				<a th:href="@{/create_tweet}" class="tweet_pop">
+					<img th:src="@{/img/tweet.svg}" alt="tweet">
+				</a>
+			</div>
+		</div>
+	</footer>
+	
+</div></body>
+</html>

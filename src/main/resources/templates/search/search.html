@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="common/common :: head"></head>
+<body><div class="wrap">
+<header th:include="common/common :: header"></header>
+
+<main>
+	<div class="inner">
+		<section class="box">
+		
+			<h2 th:text="#{user_search}">User Search</h2>
+			<input type="text" id="search_input" th:placeholder="#{search_input}">
+			
+			<div class="search_results">
+				<p class="no_shows" th:text="#{no_user}">There's no one to show.</p>
+			</div>
+			
+		</section>
+	</div>
+</main>
+
+<footer th:include="common/common :: footer"></footer>
+</div>
+<script type="text/javascript" th:inline="javascript">
+	$('#search_input').keyup(function() {
+		var req = new XMLHttpRequest();
+		var url = "/search_result?search_word=" + $(this).val();
+		req.open('GET',url);
+		req.send();
+		req.onreadystatechange = function() {
+			if (req.readyState === 4 && req.status === 200) {
+				let info = (req.responseText)?JSON.parse(req.responseText):null;
+				if (info) {
+					if (info.users.length == 0) {
+						$('.search_results').empty();
+						var no_user = /*[[#{no_user}]]*/ 'There\'s no one to show';
+						$('.search_results').append('<p class="no_shows">' + no_user + '</p>');
+					} else {
+						$('.search_results').empty();
+						for (let i = 0; i < info.users.length; i++) {
+							var icon = info.users[i].icon == null
+								? '<div class="tweet_icon" style="background: url(/img/user.png) no-repeat center/cover;"></div>'
+								: '<div class="tweet_icon" style="background: url(/icon/' + info.users[i].icon + ') no-repeat center/cover;"></div>';
+							var name = info.users[i].name == null
+								? '<span class="prof_name">' + info.users[i].userName + '</span>'
+								: '<span class="prof_name">' + info.users[i].name + '</span>' +
+								  '<span class="search_usernm">' + info.users[i].userName + '</span>';
+							
+							$('.search_results').append(
+								'<div class="search_result">' +
+									'<a href="/user/' + info.users[i].userName + '" class="search_user_link">' +
+										icon +
+										'<div class="search_usernms">' +
+											name +
+										'</div>' +
+									'</a>' +
+								'</div>'
+							);
+						}
+					}
+				}
+			}
+		}
+	});
+</script>
+</body>
+</html>

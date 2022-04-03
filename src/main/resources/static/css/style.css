@@ -1,0 +1,763 @@
+@charset "UTF-8";
+/*********
+  common
+**********/
+*, *::before, *::after {
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+html, body {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	background: #fff;
+	color: #333;
+	font-size: 16px;
+	font-family: "游ゴシック体", "Yu Gothic", YuGothic, "ヒラギノ角ゴ Pro", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, "MS Pゴシック", "MS PGothic", sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6, a, p, span, small, ul, li, div, section, main, aside, nav, header, footer, img, form, label, table, tbody, tfoot, thead, tr, th, td {
+	border: 0;
+	font: inherit;
+	font-size: 100%;
+	margin: 0;
+	padding: 0;
+	vertical-align: baseline;
+}
+
+a {
+	color: inherit;
+	outline: none;
+	text-decoration: none;
+}
+
+img {
+	border: none;
+	height: auto;
+	max-width: 100%;
+	vertical-align: top;
+}
+
+ul, ol {
+	list-style: none;
+}
+
+form, input {
+	margin: 0;
+	padding: 0;
+}
+
+.wrap {
+	overflow: hidden;
+}
+
+.inner {
+	width: 1100px;
+	margin: 0 auto;
+}
+
+.button {
+	display: block;
+	background-color: #00cc00;
+	color: #fff;
+	font-size: 14px;
+	font-weight: normal;
+	width: 100px;
+	height: 30px;
+	border: 1px solid #fff;
+	border-radius: 5px;
+	text-align: center;
+	line-height: 30px;
+	outline: none;
+	appearance: none;
+	-webkit-appearance: none;
+	cursor: pointer;
+	transition: all 0.3s;
+}
+
+.button:hover {
+	background-color: #fff;
+	color: #00cc00;
+	border: 1px solid #00cc00;
+}
+
+main {
+	padding: 100px 0 50px;
+}
+
+.sp_main {
+	padding: 150px 0 50px;
+}
+
+.box {
+	width: 700px;
+	margin: 0 auto;
+}
+
+h2 {
+	font-size: 20px;
+	height: 30px;
+	text-align: center;
+	margin-bottom: 30px;
+}
+
+.error {
+	display: none;
+	color: red;
+}
+
+.error_message {
+	color: red;
+	text-align: center;
+}
+
+@media screen and (max-width: 1179px) {
+	.inner {
+		width: 738px;
+		margin: 0 auto;
+	}
+}
+
+@media screen and (max-width: 767px) {
+	.inner {
+		width: calc(100% - 30px);
+		margin: 0 auto;
+	}
+	.button {
+		font-size: 12px;
+	}
+	main {
+		padding: 50px 0 50px;
+	}
+	.sp_main {
+		padding: 140px 0 50px;
+	}
+	.box {
+		width: 100%;
+		margin: 0;
+	}
+	h2 {
+		font-size: 16px;
+		height: 24px;
+		margin-bottom: 10px;
+	}
+}
+
+/*********
+  header
+**********/
+header {
+	position: fixed;
+	background-color: #00cc00;
+	width: 100%;
+	height: 60px;
+}
+
+.header-left {
+	float: left;
+}
+
+.header-left h1 {
+	height: 60px;
+	margin: 0;
+}
+
+.header-left h1 a {
+	display: block;
+	color: #fff;
+	font-size: 24px;
+	height: 100%;
+	line-height: 60px;
+}
+
+.header-right {
+	float: right;
+}
+
+.header-right form {
+	display: block;
+	width: 100px;
+	height: 30px;
+	margin: 15px 0;
+}
+
+@media screen and (max-width: 767px) {
+	header {
+		height: 40px;
+	}
+	.header-left h1 {
+		height: 40px;
+	}
+	.header-left h1 a {
+		font-size: 20px;
+		line-height: 40px;
+	}
+	.header-right form {
+		margin: 5px 0;
+	}
+}
+
+/*********
+  footer
+**********/
+footer {
+	position: fixed;
+	bottom: 0;
+	background-color: #00cc00;
+	width: 100%;
+	height: 40px;
+}
+
+footer .inner {
+	position: relative;
+	height: 100%;
+}
+
+.footer_menus {
+	display: flex;
+	justify-content: center;
+	height: 100%;
+}
+
+.footer_menu {
+	width: 200px;
+}
+
+.footer_menu a {
+	display: block;
+	background-color: #fff;
+	color: #00cc00;
+	font-size: 16px;
+	height: 100%;
+	border: 1px solid #00cc00;
+	text-align: center;
+	line-height: 40px;
+	transition: all 0.3s;
+}
+
+.footer_menu a:hover {
+	background-color: #00cc00;
+	color: #fff;
+}
+
+.tweet {
+	position: absolute;
+	top: -100px;
+	right: 0;
+	width: 70px;
+	height: 70px;
+	z-index: 10;
+}
+
+.tweet_pop {
+	display: block;
+	background-color: #00cc00;
+	height: 100%;
+	border-radius: 50%;
+	padding-top: 10px;
+	transition: all 0.3s;
+}
+
+.tweet_pop:hover {
+	opacity: 0.6;
+}
+
+.tweet_pop img {
+	display: block;
+	width: 50px;
+	height: 50px;
+	margin: 0 auto;
+}
+
+@media screen and (max-width: 767px) {
+	.footer_menu {
+		width: 33.3333%;
+	}
+	.footer_menu a {
+		font-size: 12px;
+	}
+	.tweet {
+		top: -60px;
+		width: 50px;
+		height: 50px;
+	}
+	.tweet_pop {
+		padding-top: 10px;
+	}
+	.tweet_pop img {
+		width: 30px;
+		height: 30px;
+	}
+}
+
+/*******
+  form
+********/
+.tweet_form {
+	width: 400px;
+	margin: 0 auto;
+}
+
+.item {
+	display: flex;
+	height: auto;
+	margin: 10px 0;
+}
+
+.icon_item {
+	margin: 10px 0 50px;
+}
+
+.icon_item .input {
+	text-align: center;
+	margin: 0 auto;
+}
+
+.item label {
+	text-align: right;
+	width: 200px;
+	line-height: 40px;
+	padding: 0 5px;
+}
+
+.input {
+	width: calc(100% - 300px);
+	height: auto;
+}
+
+.tweet_form .input {
+	width: 100%;
+}
+
+.input .data_input {
+	font-size: 16px;
+	width: 100%;
+	height: 40px;
+	border: 1px solid #333;
+	border-radius: 5px;
+	padding: 2px 10px;
+	outline: none;
+	appearance: none;
+}
+
+.input .icon_input {
+	background-color: #fff;
+	height: 100%;
+	outline: none;
+	appearance: none;
+}
+
+.input #profile, .input #tweet {
+	height: 100px;
+	padding: 5px 10px;
+}
+
+.buttons {
+	display: flex;
+	justify-content: center;
+	margin-top: 30px;
+}
+
+.buttons .button {
+	margin: 0 10px;
+}
+
+.create_account {
+	text-align: center;
+	margin-top: 10px;
+}
+
+.create_account a {
+	color: blue;
+	text-decoration: underline;
+	transition: all 0.3s;
+}
+
+.create_account a:hover {
+	opacity: 0.6;
+}
+
+@media screen and (max-width: 767px) {
+	.tweet_form {
+		width: 100%;
+		margin: 0;
+	}
+	.item {
+		display: block;
+	}
+	.item label {
+		display: block;
+		text-align: center;
+		width: 100%;
+	}
+	.input {
+		width: 100%;
+	}
+	.tweet_form .input {
+		width: 100%;
+	}
+}
+
+/**********
+  profile
+***********/
+.profile .icon {
+	display: block;
+	width: 100px;
+	height: 100px;
+	border: 2px solid #00cc00;
+	border-radius: 50%;
+	margin: 0 auto;
+}
+
+.icon_img {
+	width: 100%;
+	height: 100%;
+	border-radius: 50%;
+}
+
+.profile_top {
+	position: relative;
+}
+
+.profile_top #follow, .profile_top #unfollow {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	right: 100px;
+	margin: 0;
+}
+
+.profile_top #unfollow {
+	background-color: #fff;
+	color: #00cc00;
+	border: 1px solid #00cc00;
+}
+
+.profile_name {
+	font-size: 18px;
+	text-align: center;
+	margin-top: 10px;
+}
+
+.user_name {
+	color: #d3d3d3;
+	font-size: 14px;
+	text-align: center;
+}
+
+.profile_content {
+	text-align: center;
+	margin-top: 10px;
+}
+
+.profile .button {
+	margin: 30px auto 0;
+}
+
+.numbers {
+	display: flex;
+	justify-content: center;
+	height: 24px;
+	margin-top: 20px;
+}
+
+.numbers .following_number, .numbers .follower_number {
+	height: 100%;
+}
+
+.numbers .following_number {
+	margin-right: 30px;
+}
+
+.numbers a {
+	display: inline-block;
+	font-size: 16px;
+	height: 100%;
+	transition: all 0.3s;
+}
+
+.numbers a:hover {
+	opacity: 0.6;
+}
+
+.tabs {
+	display: flex;
+	border: 1px solid #00cc00;
+	height: 40px;
+	border-radius: 5px;
+	margin-top: 30px;
+}
+
+.tab {
+	color: #00cc00;
+	display: block;
+	width: 50%;
+	height: 100%;
+	text-align: center;
+	line-height: 38px;
+	transition: all 0.3s;
+}
+
+.active_tab {
+	background-color: #00cc00;
+	color: #fff;
+}
+
+.tabs a:hover {
+	background-color: #00cc00;
+	color: #fff;
+}
+
+.no_shows {
+	text-align: center;
+	margin-top: 30px;
+}
+
+.profile_tweet {
+	border-bottom: 1px solid #333;
+	padding: 10px;
+}
+
+.tweet_prof {
+	display: inline-block;
+}
+
+.tweet_prof_link {
+	display: flex;
+	align-items: center;
+}
+
+.tweet_icon {
+	display: block;
+	width: 40px;
+	height: 40px;
+	border: 1px solid #00cc00;
+	border-radius: 50%;
+	margin-right: 5px;
+}
+
+.tweet_content {
+	display: block;
+	padding: 10px 5px;
+}
+
+.tweet_content a {
+	display: inline-block;
+	width: auto;
+	height: auto;
+}
+
+.show_tweet_time {
+	margin-bottom: 10px;
+}
+
+.tweet_time p {
+	font-size: 14px;
+	text-align: right;
+}
+
+.tweet_like {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	min-height: 24px;
+}
+
+.tweet_like_left {
+	display: flex;
+	align-items: center;
+}
+
+.tweet_like_left img {
+	display: block;
+	width: 20px;
+	height: 20px;
+	margin-right: 10px;
+	cursor: pointer;
+}
+
+.tweet_like_list {
+	display: inline-block;
+	height: 24px;
+}
+
+.tweet_like_list a {
+	display: block;
+}
+
+.tweet_like_list span {
+	font-size: 16px;
+}
+
+@media screen and (max-width: 767px) {
+	.profile .icon {
+		width: 70px;
+		height: 70px;
+	}
+	.profile_top #follow, .profile_top #unfollow {
+		left: calc(50% + 45px);
+		right: auto;
+		font-size: 12px;
+		width: 80px;
+	}
+	.profile_name {
+		font-size: 16px;
+	}
+	.profile_content {
+		font-size: 14px;
+	}
+	.profile .button {
+		margin: 20px auto 0;
+	}
+	.numbers {
+		height: 18px;
+		margin-top: 10px;
+	}
+	.numbers a {
+		font-size: 14px;
+	}
+	.tabs {
+		height: 30px;
+		margin-top: 20px;
+	}
+	.tab {
+		line-height: 28px;
+	}
+	.tweet_like_list span {
+		font-size: 14px;
+	}
+}
+
+/*************
+  show_tweet
+**************/
+.tweet_detail {
+	border: 1px solid #00cc00;
+	border-radius: 5px;
+	padding: 10px;
+}
+
+/***********
+  timeline
+************/
+.timeline_tweets {
+	border-top: 1px solid #333;
+}
+
+.timeline_tweet {
+	border-bottom: 1px solid #333;
+	padding: 10px;
+}
+
+/*********
+  search
+**********/
+#search_input {
+	display: block;
+	font-size: 16px;
+	width: 500px;
+	height: 40px;
+	border: 1px solid #333;
+	border-radius: 5px;
+	padding: 2px 10px;
+	margin: 0 auto;
+	outline: none;
+	appearance: none;
+}
+
+.search_results {
+	margin-top: 10px;
+}
+
+.search_result {
+	height: 60px;
+	border-bottom: 1px solid #333;
+}
+
+.search_user_link {
+	display: flex;
+	align-items: center;
+	height: 100%;
+	transition: all 0.3s;
+}
+
+.search_user_link:hover {
+	opacity: 0.6;
+}
+
+.search_user_link .tweet_icon {
+	margin-right: 10px;
+}
+
+.search_usernms span {
+	display: block;
+}
+
+.search_usernm {
+	color: #d3d3d3;
+	font-size: 14px;
+}
+
+@media screen and (max-width: 767px) {
+	#search_input {
+		font-size: 14px;
+		width: 100%;
+		height: 30px;
+	}
+	.search_result {
+		height: 40px;
+	}
+	.search_result .tweet_icon {
+		width: 30px;
+		height: 30px;
+	}
+	.search_usernms span {
+		font-size: 14px;
+		height: 20px;
+	}
+	.search_usernm {
+		font-size: 12px;
+	}
+}
+
+/***********
+  back_btn
+************/
+.back_btn {
+	display: inline-block;
+	background-color: transparent;
+	color: #00cc00;
+	font-size: 14px;
+	font-weight: normal;
+	height: 20px;
+	border: none;
+	padding: 0;
+	outline: none;
+	appearance: none;
+	-webkit-appearance: none;
+	cursor: pointer;
+	transition: all 0.3s;
+}
+
+.back_btn:hover {
+	opacity: 0.6;
+}
+
+.back_follow {
+	position: absolute;
+	margin: 5px 0;
+}
+
+.back_tweet {
+	margin-bottom: 10px;
+}
+
+@media screen and (max-width: 767px) {
+	.back_follow {
+		margin: 2px 0;
+	}
+}

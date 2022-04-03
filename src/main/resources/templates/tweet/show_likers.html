@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="common/common :: head"></head>
+<body><div class="wrap">
+<header th:include="common/common :: header"></header>
+
+<main>
+	<div class="inner">
+		<section class="box">
+		
+			<button type="button" class="back_btn back_follow" th:text="#{back_btn}" onclick="history.back()"></button>
+			<h2 th:text="#{likers}">Users who liked</h2>
+			
+			<div class="search_results">
+				<div class="search_result" th:each="liker:${likers}">
+					<a th:href="@{'/user/' + ${liker.userName}}" class="search_user_link">
+						<th:block th:if="${liker.profile == null || liker.profile.icon == null}">
+							<div class="tweet_icon" th:style="'background: url(' + @{/img/user.png} + ') no-repeat center/cover;'"></div>
+						</th:block>
+						<th:block th:unless="${liker.profile == null || liker.profile.icon == null}">
+							<div class="tweet_icon" th:style="'background: url(' + @{'/icon/' + ${liker.profile.icon}} + ') no-repeat center/cover;'"></div>
+						</th:block>
+						
+						<div class="search_usernms">
+							<th:block th:if="${liker.profile == null || liker.profile.name == null}">
+								<span class="prof_name" th:text="${liker.userName}"></span>
+							</th:block>
+							<th:block th:unless="${liker.profile == null || liker.profile.name == null}">
+								<span class="prof_name" th:text="${liker.profile.name}"></span>
+								<span class="search_usernm user_name" th:text="${liker.userName}"></span>
+							</th:block>
+						</div>
+					</a>
+				</div>
+			</div>
+			
+		</section>
+	</div>
+</main>
+
+<footer th:include="common/common :: footer"></footer>
+</div>
+</body>
+</html>
